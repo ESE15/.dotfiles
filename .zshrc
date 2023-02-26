@@ -65,6 +65,7 @@ if [[ -f ${ZINIT_HOME}/zinit.zsh ]]; then
     atinit'zicompinit; zicdreplay' zdharma-continuum/fast-syntax-highlighting \
     zsh-users/zsh-autosuggestions \
     zsh-users/zsh-syntax-highlighting \
+    zsh-users/zsh-history-substring-search \
     blockf atpull'zinit creinstall -q .' zsh-users/zsh-completions
 
 
