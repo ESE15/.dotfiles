@@ -90,7 +90,7 @@ fi
 # zsh configuration
 #
 zstyle ':completion:*' menu select
-zstyle ':autocomplete:*' default-context history-incremental-search-backward
+#zstyle ':autocomplete:*' default-context history-incremental-search-backward
 # History file configuration
 [ -z "$HISTFILE" ] && HISTFILE="$HOME/.zsh_history"
 [ "$HISTSIZE" -lt 50000 ] && HISTSIZE=50000
@@ -167,3 +167,9 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 source <(kubectl completion zsh)
+
+alias kctl='kubectl'
+alias ls='lsd --no-symlink'
+alias ll='lsd -l --no-symlink'
+alias lt='lsd --tree --no-symlink'
+alias tf='terraform'
