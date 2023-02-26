@@ -64,7 +64,9 @@ if [[ -f ${ZINIT_HOME}/zinit.zsh ]]; then
   zinit wait"" lucid light-mode for \
     atinit'zicompinit; zicdreplay' zdharma-continuum/fast-syntax-highlighting \
     zsh-users/zsh-autosuggestions \
+    zsh-users/zsh-syntax-highlighting \
     blockf atpull'zinit creinstall -q .' zsh-users/zsh-completions
+
 
   # other plugins
   zinit wait"" lucid for \
@@ -88,7 +90,7 @@ fi
 # zsh configuration
 #
 zstyle ':completion:*' menu select
-
+zstyle ':autocomplete:*' default-context history-incremental-search-backward
 # History file configuration
 [ -z "$HISTFILE" ] && HISTFILE="$HOME/.zsh_history"
 [ "$HISTSIZE" -lt 50000 ] && HISTSIZE=50000
@@ -159,3 +161,9 @@ if hash dockerd 2>/dev/null; then
     disown
   fi
 fi
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+source <(kubectl completion zsh)
