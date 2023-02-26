@@ -1,0 +1,50 @@
+" Common settings
+set number
+set relativenumber
+set ignorecase
+set smartcase
+set matchpairs
+set incsearch
+set hlsearch
+set scrolloff=5
+
+" Idea specific settings
+set ideajoin
+set ideastatusicon=gray
+set idearefactormode=keep
+
+" Map leader to space
+let mapleader = " "
+
+" Closing tabs
+nmap <leader>q <Action>(CloseContent)
+nmap <leader>Q <Action>(ReopenClosedTab)
+
+" Splits
+nmap <leader>sh <Action>(SplitHorizontally)
+nmap <leader>sv <Action>(SplitVertically)
+nmap <leader>sc <Action>(Unsplit)
+nmap <leader>sC <Action>(UnsplitAll)
+nmap <leader>so <Action>(OpenEditorInOppositeTabGroup)
+nmap <leader>sn <Action>(NextSplitter)
+nmap <leader>sp <Action>(PrevSplitter)
+
+" Navigation
+nmap <leader>h <Action>(Back)
+nmap <leader>l <Action>(Forward)
+nmap <leader>L <Action>(RecentLocations)
+nmap <leader>d <Action>(GotoDeclaration)
+nmap <leader>i <Action>(GotoImplementation)
+nmap <leader>u <Action>(FindUsages)
+nmap <leader>f <Action>(GotoFile)
+nmap <leader>c <Action>(GotoClass)
+nmap <leader>/ <Action>(ShowErrorDescription)
+
+" Errors
+nmap <leader>x <Action>(GotoNextError)
+nmap <leader>X <Action>(GotoPreviousError)
+
+" Refactorings
+nmap <leader>rr <Action>(RenameElement)
+nmap <leader>rg <Action>(Generate)
+nmap <leader>rI <Action>(OptimizeImports)
