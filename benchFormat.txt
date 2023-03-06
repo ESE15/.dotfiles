@@ -1,0 +1,25 @@
+\n
+-----------CURL BENCHMARK------------\n
+https://everything.curl.dev/usingcurl/verbose/writeout\n
+--------------Metadata---------------\n
+content_type:   %{content_type}\n
+method:         %{method}\n
+---------------Size------------------\n
+size_download:  %{size_download}\n
+size_header:    %{size_header}\n
+size_request:   %{size_request}\n
+size_upload:    %{size_upload}\n
+---------------Speeds----------------\n
+namelookup:     %{time_namelookup} s\n
+connect:        %{time_connect} s\n
+appconnect:     %{time_appconnect} s\n
+pretransfer:    %{time_pretransfer} s\n
+redirect:       %{time_redirect} s\n
+starttransfer:  %{time_starttransfer} s\n
+uploadSpeed:    %{speed_upload} B/s\n
+downloadSpeed:  %{speed_download} B/s\n
+downloadSize:   %{size_download} B\n
+-------------------------------------\n
+total:          %{time_total}s\n
+-------------------------------------\n
+

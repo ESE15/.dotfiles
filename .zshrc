@@ -174,3 +174,7 @@ alias ls='lsd --no-symlink'
 alias ll='lsd -l --no-symlink'
 alias lt='lsd --tree --no-symlink'
 alias tf='terraform'
+alias curlTime="curl -w \"@$HOME/.dotfiles/benchFormat.txt\" "
+alias curl=curlTime
+
+source ~/.profile
