@@ -58,4 +58,9 @@ ln -rsf ${BASEDIR}/.ideavimrc ~/.ideavimrc
 mkdir -p ~/.config/htop
 ln -rsf "${BASEDIR}/htoprc" ~/.config/htop/htoprc
 
+## clone script
+mkdir -p ~/bin/
+ln -rsf ${BASEDIR}/jhlee11-gc ~/bin/jhlee11-gc
+ln -rsf ${BASEDIR}/ese15-gc ~/bin/ese15-gc
+
 echo 'Installation Complete!'

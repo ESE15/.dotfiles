@@ -170,6 +170,7 @@ export NVM_DIR="$HOME/.nvm"
 source <(kubectl completion zsh)
 
 alias kctl='kubectl'
+alias k='kubectl'
 alias ls='lsd --no-symlink'
 alias ll='lsd -l --no-symlink'
 alias lt='lsd --tree --no-symlink'
