@@ -171,9 +171,12 @@ source <(kubectl completion zsh)
 
 alias kctl='kubectl'
 alias k='kubectl'
+alias kn='kubens'
+alias kx='kubectx'
 alias ls='lsd --no-symlink'
 alias ll='lsd -l --no-symlink'
 alias lt='lsd --tree --no-symlink'
+alias la='ls -la'
 alias tf='terraform'
 alias curlTime="curl -w \"@$HOME/.dotfiles/benchFormat.txt\" "
 alias curl=curlTime
