@@ -1,7 +1,7 @@
 [user]
-    signingKey = ~/.ssh/ese15/id_rsa_ese15.pub
-	email = junghoon450@gmail.com
-	name = ese15
+    signingKey = ~/.ssh/jhlee11/id_rsa_cookapps-jhlee11.pub
+    email = jhlee11@cookapps.com
+    name = cookapps-jhlee11
 [credential]
     helper = store
 [pager]
@@ -17,7 +17,7 @@
     prune = true
     recurseSubmodules = true
 [gpg]
-	format = ssh
+    format = ssh
 [commit]
     gpgsign = true
 [pull]
@@ -44,4 +44,4 @@
     pu = push -u origin 
     pf = push -f
 [gpg "ssh"]
-	allowedSignersFile = ~/.ssh/allowed_signers
+    allowedSignersFile = ~/.ssh/allowed_signers
