@@ -167,12 +167,15 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+export PATH="$PATH:`yarn global bin`"
+
 source <(kubectl completion zsh)
 
 alias kctl='kubectl'
 alias k='kubectl'
 alias kn='kubens'
 alias kx='kubectx'
+alias kgi='k get all,ingress'
 alias ls='lsd --no-symlink'
 alias ll='lsd -l --no-symlink'
 alias lt='lsd --tree --no-symlink'
