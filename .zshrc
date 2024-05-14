@@ -171,6 +171,7 @@ export PATH="$PATH:`yarn global bin`"
 
 source <(kubectl completion zsh)
 
+
 alias kctl='kubectl'
 alias k='kubectl'
 alias kn='kubens'
@@ -183,5 +184,7 @@ alias la='ls -la'
 alias tf='terraform'
 alias curlTime="curl -w \"@$HOME/.dotfiles/benchFormat.txt\" "
 alias curl=curlTime
+alias dps='docker ps --format "table {{.ID}}\t{{.Image}}\t{{.Status}}\t{{.Names}}"'
+alias dpsa='dps -a'
 
 source ~/.profile
