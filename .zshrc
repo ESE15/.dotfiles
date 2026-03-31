@@ -171,9 +171,17 @@ export PATH="$PATH:`yarn global bin`"
 
 source <(kubectl completion zsh)
 
+# zsh 세팅
+HISTSIZE=50000
+SAVEHIST=50000
+setopt INC_APPEND_HISTORY # 명령어 실행할 때마다 히스토리 추가
+setopt SHARE_HISTORY # 터미널 간 같은 히스토리 공유 
+setopt EXTENDED_HISTORY # 타임스탬프 저장
+
 
 alias kctl='kubectl'
 alias k='kubectl'
+alias kk='k9s'
 alias kn='kubens'
 alias kx='kubectx'
 alias kgi='k get all,ingress'
@@ -186,5 +194,32 @@ alias curlTime="curl -w \"@$HOME/.dotfiles/benchFormat.txt\" "
 alias curl=curlTime
 alias dps='docker ps --format "table {{.ID}}\t{{.Image}}\t{{.Status}}\t{{.Names}}"'
 alias dpsa='dps -a'
+alias clean-branches="git branch -r | awk '{print \$1}' | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk '{print \$1}' | xargs git branch -D"
+alias clean-local-branches="git branch -vv | awk '\$3 !~ /\\[origin/ {print \$1}' | xargs -r git branch -D"
+alias branch-clear="clean-branches || clean-local-branches"
+alias hist="history -i -50" 
 
 source ~/.profile
+
+# pnpm
+export PNPM_HOME="/home/jhlee11/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+PATH=$PATH:/mnt/c/Users/Cookapps/AppData/Local/Programs/cursor
+export PATH="$HOME/.local/bin:$PATH"
+
+alias ascii-art='/home/jhlee11/playgrounds/high-res-ascii-painter/ascii-painter.sh '
+saveclip() {
+  local name=${1:-clip-$(date +%Y%m%d_%H%M%S).png}
+  local win=$(wslpath -w "$PWD/$name")
+  powershell.exe -NoProfile -Command "\$img = Get-Clipboard -Format Image; if (-not \$img) { Write-Error '클립보드에 이미지가 없습니다.'; exit 1 }; \$img.Save('$win',[System.Drawing.Imaging.ImageFormat]::Png)" \
+    && echo "Saved: $name"
+}
+export GIT_DISCOVERY_ACROSS_FILESYSTEM=1
+
+eval "$(direnv hook zsh)"
+
