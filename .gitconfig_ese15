@@ -1,0 +1,54 @@
+[user]
+    signingKey = ~/.ssh/id_rsa_ese15.pub
+    email = junghoon450@gmail.com
+    name = ESE15
+[credential]
+    helper = store
+[pager]
+    branch = false
+    log = true
+[diff]
+    tool = vimdiff
+[core]
+    editor = vim
+[init]
+    defaultBranch = main
+[fetch]
+    prune = true
+    recurseSubmodules = true
+[gpg]
+    format = ssh
+[commit]
+    gpgsign = true
+[pull]
+    rebase = false
+    recurseSubmodules = true
+[status]
+    showStash = true
+[alias]
+    lg = log --graph --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold white)— %an%C(reset)%C(bold yellow)%d%C(reset)' --abbrev-commit --date=relative
+    alg = log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold white)— %an%C(reset)%C(bold yellow)%d%C(reset)' --abbrev-commit --date=relative
+    alt = log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar | %ad)%C(reset) %C(white)%s%C(reset) %C(bold white)— %an%C(reset)%C(bold yellow)%d%C(reset)' --abbrev-commit --date=iso
+    sw = switch
+    sc = switch -c
+    sm = switch main
+    cv = commit -v
+    cvn = commit -v -n
+    ba = branch -a
+    bd = branch -D
+    bdo = push origin --delete 
+    f = pull
+    p = push
+    pn = push --no-verify
+    pu = push -u origin HEAD
+    pun = push -u origin HEAD --no-verify
+    pf = push -f
+    s = status
+    ss = status -s
+    sv = status -vv
+    fom = f origin main
+    d = diff
+[gpg "ssh"]
+    allowedSignersFile = ~/.ssh/allowed_signers
+[url "https://github.com/"]
+	insteadOf = git://github.com/
