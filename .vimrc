@@ -75,3 +75,15 @@ execute 'hi tsxEqual ctermfg=210'
 
 " yellow
 execute printf('hi tsxAttrib ctermfg=216')
+
+" Ctrl+A / Ctrl+E 를 Home / End 처럼 동작시키기
+" Normal / Visual
+nnoremap <C-a> ^
+nnoremap <C-e> $
+vnoremap <C-a> ^
+vnoremap <C-e> $
+
+" Insert
+inoremap <C-a> <Home>
+inoremap <C-e> <End>
+

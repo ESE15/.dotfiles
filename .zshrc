@@ -167,7 +167,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-export PATH="$PATH:`yarn global bin`"
+export PATH="$PATH:$(yarn global bin 2>/dev/null)"
 
 source <(kubectl completion zsh)
 
@@ -175,7 +175,7 @@ source <(kubectl completion zsh)
 HISTSIZE=50000
 SAVEHIST=50000
 setopt INC_APPEND_HISTORY # 명령어 실행할 때마다 히스토리 추가
-setopt SHARE_HISTORY # 터미널 간 같은 히스토리 공유 
+#setopt SHARE_HISTORY # 터미널 간 같은 히스토리 공유 
 setopt EXTENDED_HISTORY # 타임스탬프 저장
 
 
@@ -191,15 +191,16 @@ alias lt='lsd --tree --no-symlink'
 alias la='ls -la'
 alias tf='terraform'
 alias curlTime="curl -w \"@$HOME/.dotfiles/benchFormat.txt\" "
-alias curl=curlTime
+#alias curl=curlTime
 alias dps='docker ps --format "table {{.ID}}\t{{.Image}}\t{{.Status}}\t{{.Names}}"'
 alias dpsa='dps -a'
 alias clean-branches="git branch -r | awk '{print \$1}' | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk '{print \$1}' | xargs git branch -D"
 alias clean-local-branches="git branch -vv | awk '\$3 !~ /\\[origin/ {print \$1}' | xargs -r git branch -D"
 alias branch-clear="clean-branches || clean-local-branches"
 alias hist="history -i -50" 
+alias cdsp='claude --dangerously-skip-permissions'
 
-source ~/.profile
+#source ~/.profile
 
 # pnpm
 export PNPM_HOME="/home/jhlee11/.local/share/pnpm"
@@ -212,6 +213,8 @@ esac
 PATH=$PATH:/mnt/c/Users/Cookapps/AppData/Local/Programs/cursor
 export PATH="$HOME/.local/bin:$PATH"
 
+alias idea='open -na "IntelliJ IDEA.app" --args "$@"'
+
 alias ascii-art='/home/jhlee11/playgrounds/high-res-ascii-painter/ascii-painter.sh '
 saveclip() {
   local name=${1:-clip-$(date +%Y%m%d_%H%M%S).png}
@@ -222,4 +225,52 @@ saveclip() {
 export GIT_DISCOVERY_ACROSS_FILESYSTEM=1
 
 eval "$(direnv hook zsh)"
+
+
+# openjdk@21 (added by Claude)
+export PATH="/opt/homebrew/opt/openjdk@21/bin:$PATH"
+export JAVA_HOME="/opt/homebrew/opt/openjdk@21/libexec/openjdk.jdk/Contents/Home"
+
+hive-kill() {
+    local target="${1:-all}"
+    local found=0
+
+    # Backend services (Java)
+    local be_pattern
+    if [[ "$target" == "all" ]]; then
+      be_pattern='(ops-api|platform-api|game-grpc)'
+    elif [[ "$target" != "hive-admin" ]]; then
+      be_pattern="$target"
+    fi
+
+    if [[ -n "$be_pattern" ]]; then
+      local be_pids
+      be_pids=$(ps aux | grep -E "$be_pattern" | grep java | grep -v grep | awk '{print $2}')
+      if [[ -n "$be_pids" ]]; then
+        found=1
+        echo "$be_pids" | while read pid; do
+          local name=$(ps -p "$pid" -o args= | grep -oE '(ops-api|platform-api|game-grpc)')
+          echo "Killing $name (PID: $pid)"
+          kill "$pid"
+        done
+      fi
+    fi
+
+    # Frontend service (Node.js)
+    if [[ "$target" == "all" || "$target" == "hive-admin" ]]; then
+      local fe_pids
+      fe_pids=$(ps aux | grep -E 'hive-admin|platform-web' | grep node | grep -v grep | awk '{print $2}')
+      if [[ -n "$fe_pids" ]]; then
+        found=1
+        echo "$fe_pids" | while read pid; do
+          echo "Killing hive-admin (PID: $pid)"
+          kill "$pid"
+        done
+      fi
+    fi
+
+    if [[ $found -eq 0 ]]; then
+      echo "No running process found for: $target"
+    fi
+  }
 
