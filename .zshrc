@@ -273,5 +273,3 @@ hive-kill() {
     fi
   }
 
-export MANUS_API_KEY='sk-mEwiEleYmI9brYRv45T_PoXoAmg9IbePKxEQVQmrVyJP19AZHzst79nz795uNM-qAiLYm-dAcJRTbTAsOD50FUw_kU_f'
-
