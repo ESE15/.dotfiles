@@ -37,7 +37,7 @@ if [[ -f ${ZINIT_HOME}/zinit.zsh ]]; then
   # pyenv
   zinit wait"" lucid for \
     atinit'export PYENV_ROOT=$PWD' \
-    atclone'PYENV_ROOT=$PWD ./bin/pyenv init - > zpyenv.zsh' \
+    atclone'PYENV_ROOT=$PWD ./bin/pyenv init - | grep -v "^command pyenv rehash$" > zpyenv.zsh' \
     atpull"%atclone" \
     src"zpyenv.zsh" nocompile"!" sbin"bin/pyenv" \
     pyenv/pyenv
@@ -99,7 +99,6 @@ zstyle ':completion:*' menu select
 
 # term
 export TERM="xterm-256color"
-
 #
 # Path
 #
@@ -238,7 +237,7 @@ hive-kill() {
     # Backend services (Java)
     local be_pattern
     if [[ "$target" == "all" ]]; then
-      be_pattern='(ops-api|platform-api|game-grpc)'
+      be_pattern='(ops-api|platform-api|game-api)'
     elif [[ "$target" != "hive-admin" ]]; then
       be_pattern="$target"
     fi
@@ -249,7 +248,7 @@ hive-kill() {
       if [[ -n "$be_pids" ]]; then
         found=1
         echo "$be_pids" | while read pid; do
-          local name=$(ps -p "$pid" -o args= | grep -oE '(ops-api|platform-api|game-grpc)')
+          local name=$(ps -p "$pid" -o args= | grep -oE '(ops-api|platform-api|game-api)')
           echo "Killing $name (PID: $pid)"
           kill "$pid"
         done
@@ -273,4 +272,6 @@ hive-kill() {
       echo "No running process found for: $target"
     fi
   }
+
+export MANUS_API_KEY='sk-mEwiEleYmI9brYRv45T_PoXoAmg9IbePKxEQVQmrVyJP19AZHzst79nz795uNM-qAiLYm-dAcJRTbTAsOD50FUw_kU_f'
 
